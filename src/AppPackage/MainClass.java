@@ -139,43 +139,12 @@ public class MainClass
            public void actionPerformed(ActionEvent e) {
               
                 slider.setValue((int)(slider.getValue()+350/(songTotalLength/10000)));
-               /*    System.out.println((valueInThere+(350/(songTotalLength/10000))));*/
                    slider.setValue(slider.getValue()+1);
                
            }
            
        });
-       timer.start();
-       
-       /*    movingLabelOfPositioon = new Thread(new Runnable() {
-
-           @Override
-           public void run() {
-               if(RDR.moveThread.isAlive()){
-               int valueInThere=valueOfSlider;
-               while(valueInThere!=350){
-               slider.setValue((int)(valueInThere+350/(songTotalLength/10000)));
-                   System.out.println((valueInThere+(350/(songTotalLength/10000))));
-                   valueInThere++;
-                   try {
-                       Thread.sleep(1000);
-                   } 
-                   catch (InterruptedException ex) 
-                   {
-                   }
-               }
-           }
-           }
-       });
-      
-       movingLabelOfPositioon.start();*/
-       
-     
-       /*Я это ты не забуть протестироват
-       Timer timer = new Timer(1000 , new ActionListener().............. 
-       если не получится исправить баг 
-       */
-       
+       timer.start();       
    }
    
     
