@@ -12,7 +12,7 @@ public class RunDisplayRun   {
     public Thread moveThread;
     public int someInteger=-1;
     public char[] charArray;
-      public char[] charArray2;
+    public char[] charArray2;
     public Queue<Character> queue = new LinkedList<Character>();
     public RunDisplayRun(String text ) {
           movingLabel=false;

@@ -2,6 +2,7 @@ package AppPackage;
 
 //All code is added to create the widget. Follow the "Create a Widget" tutorial if you want to know how I did it.
 
+import AppPackage.model.PlaylistModelOfFile;
 import AppPackage.model.RunDisplayRun;
 import java.awt.Toolkit;
 import java.io.File;
@@ -18,6 +19,7 @@ public class MP3PlayerGUI extends javax.swing.JDialog
     AllFileInTheDirModel modelFromList = new AllFileInTheDirModel() ;
     File myFile;
     RunDisplayRun RDR = new RunDisplayRun("");
+    PlaylistModelOfFile playListFile = new PlaylistModelOfFile();
     Thread movingNameThread;
     String newDirOfFiles="";
     MainClass MC = new MainClass();
@@ -84,8 +86,13 @@ public class MP3PlayerGUI extends javax.swing.JDialog
         });
         getContentPane().add(PlayFromMiddleOfFile, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 70, -1, -1));
 
-        OpenPlaylistLabel.setText("Открыть плейлист");
-        getContentPane().add(OpenPlaylistLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 470, -1, -1));
+        OpenPlaylistLabel.setText("Сохранить в файл");
+        OpenPlaylistLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                OpenPlaylistLabelMouseReleased(evt);
+            }
+        });
+        getContentPane().add(OpenPlaylistLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 470, -1, -1));
 
         ReturnSlider.setBackground(new java.awt.Color(204, 102, 0));
         ReturnSlider.setMaximum(350);
@@ -348,6 +355,18 @@ public class MP3PlayerGUI extends javax.swing.JDialog
         MC.rewind(ReturnSlider, ReturnSlider.getValue());
         MC.timer.start();
     }//GEN-LAST:event_ReturnSliderMouseReleased
+
+    private void OpenPlaylistLabelMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OpenPlaylistLabelMouseReleased
+        JFileChooser chooser = new JFileChooser();
+        int returnVal=chooser.showOpenDialog(null);
+        
+            if(returnVal == JFileChooser.APPROVE_OPTION)
+            {   
+                playListFile.savePlaylist(chooser.getSelectedFile().getAbsolutePath(),modelFromList.getListOfPaths());
+            }
+     /*   modelFromList.removeAllData();
+        PlayList1.updateUI();*/
+    }//GEN-LAST:event_OpenPlaylistLabelMouseReleased
 
     public static void main(String args[]) 
     {
