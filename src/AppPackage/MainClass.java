@@ -94,7 +94,7 @@ public class MainClass
     
     
     
-    public void PlayFromMiddle(long postion)
+    public void rewindSong(long postion)
     {
      try 
         {
@@ -131,7 +131,7 @@ public class MainClass
     
     }
     
-    public void Moving(JSlider slider,int valueOfSlider)
+    public void rewind(JSlider slider,int valueOfSlider)
    {
 
        timer = new Timer(1000,new ActionListener() {
@@ -146,7 +146,7 @@ public class MainClass
        });
        timer.start();       
    }
-   
+
     
     
     

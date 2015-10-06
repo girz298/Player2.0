@@ -2,6 +2,7 @@ package AppPackage;
 
 //All code is added to create the widget. Follow the "Create a Widget" tutorial if you want to know how I did it.
 
+import AppPackage.model.RunDisplayRun;
 import java.awt.Toolkit;
 import java.io.File;
 import java.io.FileFilter;
@@ -19,7 +20,6 @@ public class MP3PlayerGUI extends javax.swing.JDialog
     RunDisplayRun RDR = new RunDisplayRun("");
     Thread movingNameThread;
     MainClass MC = new MainClass();
-    MovingSlider movingSlider ;
     public static int count;
     public double lengthOfSongDouble;
     public int lengthOfSong;
@@ -197,7 +197,7 @@ public class MP3PlayerGUI extends javax.swing.JDialog
       /*  int k=0;
         if (k>0){RDR.StopMoving(Display);}*/
         
-        JFileChooser chooser = new JFileChooser("D:\\Музыка на телефон");
+        JFileChooser chooser = new JFileChooser("D:\\Музыка");
         int returnVal=chooser.showOpenDialog(null);
         
         
@@ -217,7 +217,7 @@ public class MP3PlayerGUI extends javax.swing.JDialog
             RDR.Move(Display);
             
             MC.Play(song);
-            MC.Moving(ReturnSlider, ReturnSlider.getValue());
+            MC.rewind(ReturnSlider, ReturnSlider.getValue());
             lengthOfSong=0;
             ReturnSlider.setValue(1);
             lengthOfSong=(int)MC.songTotalLength;
@@ -238,7 +238,7 @@ public class MP3PlayerGUI extends javax.swing.JDialog
             RDR.Move(Display);
             
             MC.Play(song);
-            MC.Moving(ReturnSlider, ReturnSlider.getValue());
+            MC.rewind(ReturnSlider, ReturnSlider.getValue());
             lengthOfSong=0;
             ReturnSlider.setValue(1);
             lengthOfSong=(int)MC.songTotalLength;
@@ -273,9 +273,9 @@ public class MP3PlayerGUI extends javax.swing.JDialog
         MC.Pause();
         System.out.println(ReturnSlider.getValue());
         MC.timer.stop();
-        MC.PlayFromMiddle(lengthOfSong/2);
+        MC.rewindSong(lengthOfSong/2);
         ReturnSlider.setValue(175);
-        MC.Moving(ReturnSlider, ReturnSlider.getValue());
+        MC.rewind(ReturnSlider, ReturnSlider.getValue());
         MC.timer.start();
         
     }//GEN-LAST:event_PlayFromMiddleOfFileMouseReleased
@@ -287,7 +287,7 @@ public class MP3PlayerGUI extends javax.swing.JDialog
         MC.Play(modelFromList.getPath(PlayList1.getSelectedIndex()));
         RDR=new RunDisplayRun((String) modelFromList.getElementAt(PlayList1.getSelectedIndex())+"      ");
         RDR.Move(Display);
-         MC.Moving(ReturnSlider, ReturnSlider.getValue());
+         MC.rewind(ReturnSlider, ReturnSlider.getValue());
             lengthOfSong=0;
             ReturnSlider.setValue(1);
             lengthOfSong=(int)MC.songTotalLength;
@@ -299,8 +299,8 @@ public class MP3PlayerGUI extends javax.swing.JDialog
          MC.Pause();
         System.out.println(ReturnSlider.getValue());
         MC.timer.stop();
-        MC.PlayFromMiddle((lengthOfSong/350)*(long)ReturnSlider.getValue());
-        MC.Moving(ReturnSlider, ReturnSlider.getValue());
+        MC.rewindSong((lengthOfSong/350)*(long)ReturnSlider.getValue());
+        MC.rewind(ReturnSlider, ReturnSlider.getValue());
         MC.timer.start();
     }//GEN-LAST:event_ReturnSliderMouseReleased
 

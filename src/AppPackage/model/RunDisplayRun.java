@@ -1,4 +1,4 @@
-package AppPackage;
+package AppPackage.model;
 
 import static AppPackage.MP3PlayerGUI.Display;
 import java.util.Arrays;
