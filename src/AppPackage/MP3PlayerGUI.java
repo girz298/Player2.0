@@ -19,6 +19,7 @@ public class MP3PlayerGUI extends javax.swing.JDialog
     File myFile;
     RunDisplayRun RDR = new RunDisplayRun("");
     Thread movingNameThread;
+    String newDirOfFiles="";
     MainClass MC = new MainClass();
     public static int count;
     public double lengthOfSongDouble;
@@ -194,62 +195,103 @@ public class MP3PlayerGUI extends javax.swing.JDialog
     }//GEN-LAST:event_PauseMouseReleased
 
     private void SelectFileMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SelectFileMouseReleased
-      /*  int k=0;
-        if (k>0){RDR.StopMoving(Display);}*/
-        
-        JFileChooser chooser = new JFileChooser("D:\\Музыка");
+        if(newDirOfFiles.equals(""))
+        {
+        JFileChooser chooser = new JFileChooser();
         int returnVal=chooser.showOpenDialog(null);
         
-        
-        if(returnVal == JFileChooser.APPROVE_OPTION)
-        {   
-           if(RDR.isActive()) 
-           {
-               RDR.StopMoving(Display);
-               MC.Stop();
-           
-            myFile = chooser.getSelectedFile();
-            String song = myFile + "";
-          /* PlayList1.setModel(new AllFileInTheDirModel());*/
-            String name = chooser.getSelectedFile().getName();
-            RDR = new RunDisplayRun(name+"     ");
-            
-            RDR.Move(Display);
-            
-            MC.Play(song);
-            MC.rewind(ReturnSlider, ReturnSlider.getValue());
-            lengthOfSong=0;
-            ReturnSlider.setValue(1);
-            lengthOfSong=(int)MC.songTotalLength;
-            modelFromList.addData(myFile);
-            PlayList1.updateUI();
-            myFile=null;
-           }
-           else{
-            System.out.println(RDR.isActive());
-            MC.Stop();
-           
-            myFile = chooser.getSelectedFile();
-            String song = myFile + "";
-          /* PlayList1.setModel(new AllFileInTheDirModel());*/
-            String name = chooser.getSelectedFile().getName();
-            RDR = new RunDisplayRun(name+"     ");
-            
-            RDR.Move(Display);
-            
-            MC.Play(song);
-            MC.rewind(ReturnSlider, ReturnSlider.getValue());
-            lengthOfSong=0;
-            ReturnSlider.setValue(1);
-            lengthOfSong=(int)MC.songTotalLength;
-            modelFromList.addData(myFile);
-            PlayList1.updateUI();
-            myFile=null;
-           
-           }
-        }
-    }//GEN-LAST:event_SelectFileMouseReleased
+            if(returnVal == JFileChooser.APPROVE_OPTION)
+            {   
+               if(RDR.isActive()) 
+               {
+                    RDR.StopMoving(Display);
+                    MC.Stop();
+                    myFile = chooser.getSelectedFile();
+                    String song = myFile + "";
+                    String name = chooser.getSelectedFile().getName();
+                    RDR = new RunDisplayRun(name+"     ");
+                    RDR.Move(Display);
+                    MC.Play(song);
+                    MC.rewind(ReturnSlider, ReturnSlider.getValue());
+                    lengthOfSong=0;
+                    ReturnSlider.setValue(1);
+                    lengthOfSong=(int)MC.songTotalLength;
+                    modelFromList.addData(myFile);
+                    PlayList1.updateUI();
+                    newDirOfFiles=myFile.getAbsolutePath();
+                    myFile=null;
+               }
+               else
+               {
+                    System.out.println(RDR.isActive());
+                    MC.Stop();
+                    myFile = chooser.getSelectedFile();
+                    String song = myFile + "";
+                    String name = chooser.getSelectedFile().getName();
+                    RDR = new RunDisplayRun(name+"     ");
+                    RDR.Move(Display);
+                    MC.Play(song);
+                    MC.rewind(ReturnSlider, ReturnSlider.getValue());
+                    lengthOfSong=0;
+                    ReturnSlider.setValue(1);
+                    lengthOfSong=(int)MC.songTotalLength;
+                    modelFromList.addData(myFile);
+                    PlayList1.updateUI();
+                    newDirOfFiles=myFile.getAbsolutePath();
+                    myFile=null;
 
+               }
+            }
+        }else{
+        JFileChooser chooser = new JFileChooser(newDirOfFiles);
+        int returnVal=chooser.showOpenDialog(null);
+        
+            if(returnVal == JFileChooser.APPROVE_OPTION)
+            {   
+               if(RDR.isActive()) 
+               {
+                    RDR.StopMoving(Display);
+                    MC.Stop();
+                    myFile = chooser.getSelectedFile();
+                    String song = myFile + "";
+                    String name = chooser.getSelectedFile().getName();
+                    RDR = new RunDisplayRun(name+"     ");
+                    RDR.Move(Display);
+                    MC.Play(song);
+                    MC.rewind(ReturnSlider, ReturnSlider.getValue());
+                    lengthOfSong=0;
+                    ReturnSlider.setValue(1);
+                    lengthOfSong=(int)MC.songTotalLength;
+                    modelFromList.addData(myFile);
+                    PlayList1.updateUI();
+                    newDirOfFiles=myFile.getAbsolutePath();
+                    myFile=null;
+               }
+               else
+               {
+                    System.out.println(RDR.isActive());
+                    MC.Stop();
+                    myFile = chooser.getSelectedFile();
+                    String song = myFile + "";
+                    String name = chooser.getSelectedFile().getName();
+                    RDR = new RunDisplayRun(name+"     ");
+                    RDR.Move(Display);
+                    MC.Play(song);
+                    MC.rewind(ReturnSlider, ReturnSlider.getValue());
+                    lengthOfSong=0;
+                    ReturnSlider.setValue(1);
+                    lengthOfSong=(int)MC.songTotalLength;
+                    modelFromList.addData(myFile);
+                    PlayList1.updateUI();
+                    newDirOfFiles=myFile.getAbsolutePath();
+                    myFile=null;
+                } 
+            }
+        }             
+    }//GEN-LAST:event_SelectFileMouseReleased
+      
+ 
+        
     private void LoopMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LoopMouseReleased
         switch(count)
         {
