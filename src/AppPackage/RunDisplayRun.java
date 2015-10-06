@@ -25,8 +25,6 @@ public class RunDisplayRun   {
        
         movingLabel=false;
           moveThread.stop();
-      /*  text="";
-        display.setText("");*/
     }
     
     public boolean isActive()
@@ -47,12 +45,9 @@ public class RunDisplayRun   {
 
                 if(someInteger==text.length()-1)
                 {
-                  /*  char swap;
-                    swap = queue.remove();*/
                     queue.add(queue.remove());
 
                 }else{ someInteger++; queue.add(charArray[someInteger]);} 
-              /*  System.out.println(queue);*/
                  display.setText(queue.toString().replace(',','\0'));
                 try {
                     Thread.sleep(150);
