@@ -46,6 +46,7 @@ public class MP3PlayerGUI extends javax.swing.JDialog
         PlayList = new javax.swing.JScrollPane();
         PlayList1 = new javax.swing.JList();
         PlayFromMiddleOfFile = new javax.swing.JLabel();
+        OpenPlaylistLabel = new javax.swing.JLabel();
         ReturnSlider = new javax.swing.JSlider();
         CloseLabel = new javax.swing.JLabel();
         LoopPosition = new javax.swing.JLabel();
@@ -83,10 +84,12 @@ public class MP3PlayerGUI extends javax.swing.JDialog
         });
         getContentPane().add(PlayFromMiddleOfFile, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 70, -1, -1));
 
+        OpenPlaylistLabel.setText("Открыть плейлист");
+        getContentPane().add(OpenPlaylistLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 470, -1, -1));
+
         ReturnSlider.setBackground(new java.awt.Color(204, 102, 0));
         ReturnSlider.setMaximum(350);
         ReturnSlider.setValue(1);
-        ReturnSlider.setBorder(null);
         ReturnSlider.setOpaque(false);
         ReturnSlider.setRequestFocusEnabled(false);
         ReturnSlider.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -394,6 +397,7 @@ public class MP3PlayerGUI extends javax.swing.JDialog
     public static javax.swing.JLabel Display;
     private javax.swing.JLabel Loop;
     public static javax.swing.JLabel LoopPosition;
+    private javax.swing.JLabel OpenPlaylistLabel;
     private javax.swing.JLabel Pause;
     private javax.swing.JLabel Play;
     private javax.swing.JLabel PlayFromMiddleOfFile;
