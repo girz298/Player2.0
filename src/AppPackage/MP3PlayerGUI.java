@@ -2,8 +2,10 @@ package AppPackage;
 
 //All code is added to create the widget. Follow the "Create a Widget" tutorial if you want to know how I did it.
 
-import AppPackage.model.PlaylistModelOfFile;
-import AppPackage.model.RunDisplayRun;
+import AppPackage.model.PlayListModel;
+import Сontroller.MainClass;
+import Сontroller.ReadAndWriteRealisation;
+import Сontroller.RunDisplayRun;
 import java.awt.Toolkit;
 import java.io.File;
 import java.io.FileFilter;
@@ -17,10 +19,10 @@ import javax.swing.JLabel;
 
 public class MP3PlayerGUI extends javax.swing.JDialog 
 {   
-    private AllFileInTheDirModel modelFromList = new AllFileInTheDirModel() ;
+    private PlayListModel modelFromList = new PlayListModel() ;
     private File myFile;
     private RunDisplayRun RDR = new RunDisplayRun("");
-    private PlaylistModelOfFile playListFile = new PlaylistModelOfFile();
+    private ReadAndWriteRealisation playListFile = new ReadAndWriteRealisation();
     private Thread movingNameThread;
     private String newDirOfFiles="";
     private MainClass MC = new MainClass();

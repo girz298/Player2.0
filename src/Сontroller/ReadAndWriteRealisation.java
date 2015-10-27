@@ -1,6 +1,7 @@
 
-package AppPackage.model;
+package Сontroller;
 
+import AppPackage.model.ModelOfFile;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -11,7 +12,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PlaylistModelOfFile {
+public class ReadAndWriteRealisation {
      private BufferedReader BufferedFileInputStream;    
      private StringBuffer stringBuff;
      private String str;

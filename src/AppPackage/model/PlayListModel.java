@@ -1,4 +1,4 @@
-package AppPackage;
+package AppPackage.model;
 
 
 import AppPackage.model.ModelOfFile;
@@ -10,8 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.AbstractListModel;
 
-public class AllFileInTheDirModel extends AbstractListModel{
-    public AllFileInTheDirModel() {
+public class PlayListModel extends AbstractListModel{
+    public PlayListModel() {
     }
     private ModelOfFile modelOffile;
     private List<ModelOfFile> listOfPaths=new ArrayList<ModelOfFile>();
