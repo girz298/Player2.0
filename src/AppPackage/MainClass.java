@@ -49,7 +49,7 @@ public class MainClass
         {
             System.out.println("Position:"+player.getPosition());
           player.close();
-          pauseLocation = 0;
+          pauseLocation = songTotalLength;
        /*   songTotalLength = 0;*/
           MP3PlayerGUI.Display.setText("");
           timer.stop();

@@ -13,9 +13,7 @@ import javax.swing.AbstractListModel;
 public class AllFileInTheDirModel extends AbstractListModel{
     public AllFileInTheDirModel() {
     }
-    
     private ModelOfFile modelOffile;
-    /*private ArrayList<String> listOfSongs=new ArrayList<String>();*/
     private List<ModelOfFile> listOfPaths=new ArrayList<ModelOfFile>();
    
     
@@ -39,24 +37,8 @@ public class AllFileInTheDirModel extends AbstractListModel{
     public void removeAllData()
     {
         listOfPaths.removeAll(listOfPaths);
-    /*    listOfSongs.removeAll(listOfSongs);*/
     }
-    
-    
-  /*  public void addArraydataToPlaylist(ArrayList<File> listOfData)
-    {
-        for(int i = 0;i<listOfData.size();i++)
-        {
-            modelOffile.setPath(listOfData.get(i).toString());
-            modelOffile.setName(listOfData.get(i).getName().replaceFirst(".mp3", ""));
-            listOfPaths.add(modelOffile);
-            listOfPaths.add(listOfData.get(i).toString());
-            listOfSongs.add(listOfData.get(i).getName().replaceFirst(".mp3", ""));
-        
-        }
-    
-    }*/
-    
+
     
    @Override
     public int getSize() {
@@ -82,10 +64,6 @@ public class AllFileInTheDirModel extends AbstractListModel{
 
     @Override
     public Object getElementAt(int index) {
-      return listOfPaths.get(index).getName();
-       
+      return listOfPaths.get(index).getName();   
     }
-    
-    
-    
 }
