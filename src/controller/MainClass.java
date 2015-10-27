@@ -1,6 +1,6 @@
-package Сontroller;
+package controller;
 
-import AppPackage.MP3PlayerGUI;
+import view.MP3PlayerGUI;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedInputStream;

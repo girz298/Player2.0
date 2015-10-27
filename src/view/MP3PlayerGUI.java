@@ -1,11 +1,11 @@
-package AppPackage;
+package view;
 
 //All code is added to create the widget. Follow the "Create a Widget" tutorial if you want to know how I did it.
 
-import AppPackage.model.PlayListModel;
-import Сontroller.MainClass;
-import Сontroller.ReadAndWriteRealisation;
-import Сontroller.RunDisplayRun;
+import model.PlayListModel;
+import controller.MainClass;
+import controller.ReadAndWriteRealisation;
+import controller.RunDisplayRun;
 import java.awt.Toolkit;
 import java.io.File;
 import java.io.FileFilter;
@@ -182,7 +182,7 @@ public class MP3PlayerGUI extends javax.swing.JDialog
         });
         getContentPane().add(Loop, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 40, 40));
 
-        Background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/AppPackage/Background3.png"))); // NOI18N
+        Background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/Background3.png"))); // NOI18N
         Background.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 BackgroundMouseDragged(evt);

@@ -1,6 +1,6 @@
-package Сontroller;
+package controller;
 
-import static AppPackage.MP3PlayerGUI.Display;
+import static view.MP3PlayerGUI.Display;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;

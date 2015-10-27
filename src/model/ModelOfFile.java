@@ -1,5 +1,5 @@
 
-package AppPackage.model;
+package model;
 
 public class ModelOfFile {
     private String path;

@@ -1,7 +1,7 @@
-package AppPackage.model;
+package model;
 
 
-import AppPackage.model.ModelOfFile;
+import model.ModelOfFile;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;

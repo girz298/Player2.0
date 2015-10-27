@@ -1,7 +1,7 @@
 
-package Сontroller;
+package controller;
 
-import AppPackage.model.ModelOfFile;
+import model.ModelOfFile;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
