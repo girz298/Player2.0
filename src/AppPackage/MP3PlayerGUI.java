@@ -7,6 +7,7 @@ import AppPackage.model.RunDisplayRun;
 import java.awt.Toolkit;
 import java.io.File;
 import java.io.FileFilter;
+import java.io.IOException;
 import static java.lang.System.exit;
 import java.util.LinkedList;
 import java.util.logging.Level;
@@ -55,8 +56,9 @@ public class MP3PlayerGUI extends javax.swing.JDialog
 
         PlayList = new javax.swing.JScrollPane();
         PlayList1 = new javax.swing.JList();
+        OpenPlayListLabel = new javax.swing.JLabel();
         PlayFromMiddleOfFile = new javax.swing.JLabel();
-        OpenPlaylistLabel = new javax.swing.JLabel();
+        SavePlaylistLabel = new javax.swing.JLabel();
         ReturnSlider = new javax.swing.JSlider();
         CloseLabel = new javax.swing.JLabel();
         LoopPosition = new javax.swing.JLabel();
@@ -86,6 +88,14 @@ public class MP3PlayerGUI extends javax.swing.JDialog
 
         getContentPane().add(PlayList, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 330, 260));
 
+        OpenPlayListLabel.setText("Открыть плейлист");
+        OpenPlayListLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                OpenPlayListLabelMouseReleased(evt);
+            }
+        });
+        getContentPane().add(OpenPlayListLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 470, 110, -1));
+
         PlayFromMiddleOfFile.setText("К центру");
         PlayFromMiddleOfFile.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
@@ -94,13 +104,13 @@ public class MP3PlayerGUI extends javax.swing.JDialog
         });
         getContentPane().add(PlayFromMiddleOfFile, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 70, -1, -1));
 
-        OpenPlaylistLabel.setText("Сохранить в файл");
-        OpenPlaylistLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+        SavePlaylistLabel.setText("Сохранить в файл");
+        SavePlaylistLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
-                OpenPlaylistLabelMouseReleased(evt);
+                SavePlaylistLabelMouseReleased(evt);
             }
         });
-        getContentPane().add(OpenPlaylistLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 470, -1, -1));
+        getContentPane().add(SavePlaylistLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 470, -1, -1));
 
         ReturnSlider.setBackground(new java.awt.Color(204, 102, 0));
         ReturnSlider.setMaximum(350);
@@ -331,7 +341,7 @@ public class MP3PlayerGUI extends javax.swing.JDialog
         MC.getTimer().start();
     }//GEN-LAST:event_ReturnSliderMouseReleased
 
-    private void OpenPlaylistLabelMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OpenPlaylistLabelMouseReleased
+    private void SavePlaylistLabelMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SavePlaylistLabelMouseReleased
         JFileChooser chooser = new JFileChooser();
         int returnVal=chooser.showOpenDialog(null);
         
@@ -341,7 +351,37 @@ public class MP3PlayerGUI extends javax.swing.JDialog
             }
      /*   modelFromList.removeAllData();
         PlayList1.updateUI();*/
-    }//GEN-LAST:event_OpenPlaylistLabelMouseReleased
+    }//GEN-LAST:event_SavePlaylistLabelMouseReleased
+
+    private void OpenPlayListLabelMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OpenPlayListLabelMouseReleased
+         JFileChooser chooser = new JFileChooser();
+        int returnVal=chooser.showOpenDialog(null);
+        
+            if(returnVal == JFileChooser.APPROVE_OPTION)
+            {   
+            
+             try {
+                 modelFromList.removeAllData();
+                 modelFromList.setListOfPaths(playListFile.openPlayList(chooser.getSelectedFile().getAbsolutePath()));
+                 PlayList1.updateUI();
+                 
+                 String name = playListFile.openPlayList(chooser.getSelectedFile().getAbsolutePath()).get(0).getName();
+            RDR = new RunDisplayRun(name+"     ");
+            RDR.Move(Display);
+            MC.Play(playListFile.openPlayList(chooser.getSelectedFile().getAbsolutePath()).get(0).getPath());
+            MC.rewind(ReturnSlider, ReturnSlider.getValue());
+            lengthOfSong=0;
+            ReturnSlider.setValue(1);
+            lengthOfSong=(int)MC.getSongTotalLength();
+                  
+             } catch (IOException ex) {
+                 Logger.getLogger(MP3PlayerGUI.class.getName()).log(Level.SEVERE, null, ex);
+             }
+         
+             
+            }      
+            
+    }//GEN-LAST:event_OpenPlayListLabelMouseReleased
 
     public static void main(String args[]) 
     {
@@ -391,13 +431,14 @@ public class MP3PlayerGUI extends javax.swing.JDialog
     public static javax.swing.JLabel Display;
     private javax.swing.JLabel Loop;
     public static javax.swing.JLabel LoopPosition;
-    private javax.swing.JLabel OpenPlaylistLabel;
+    private javax.swing.JLabel OpenPlayListLabel;
     private javax.swing.JLabel Pause;
     private javax.swing.JLabel Play;
     private javax.swing.JLabel PlayFromMiddleOfFile;
     private javax.swing.JScrollPane PlayList;
     private javax.swing.JList PlayList1;
     private javax.swing.JSlider ReturnSlider;
+    private javax.swing.JLabel SavePlaylistLabel;
     private javax.swing.JLabel SelectFile;
     private javax.swing.JLabel Stop;
     // End of variables declaration//GEN-END:variables

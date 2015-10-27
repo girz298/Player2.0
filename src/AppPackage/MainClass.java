@@ -8,6 +8,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.sound.sampled.FloatControl;
 import javax.swing.JSlider;
 import javax.swing.Timer;
 import javazoom.jl.decoder.JavaLayerException;
@@ -79,9 +80,8 @@ public class MainClass
         {
             FIS = new FileInputStream(fileLocation);
             BIS = new BufferedInputStream(FIS);
-            
             player = new Player(BIS);
-            FIS.skip(songTotalLength-pauseLocation);
+            FIS.skip(songTotalLength-pauseLocation);   
         } 
         catch (FileNotFoundException | JavaLayerException ex) {
             
