@@ -16,22 +16,30 @@ import javax.swing.JLabel;
 
 public class MP3PlayerGUI extends javax.swing.JDialog 
 {   
-    AllFileInTheDirModel modelFromList = new AllFileInTheDirModel() ;
-    File myFile;
-    RunDisplayRun RDR = new RunDisplayRun("");
-    PlaylistModelOfFile playListFile = new PlaylistModelOfFile();
-    Thread movingNameThread;
-    String newDirOfFiles="";
-    MainClass MC = new MainClass();
-    public static int count;
-    public double lengthOfSongDouble;
-    public int lengthOfSong;
+    private AllFileInTheDirModel modelFromList = new AllFileInTheDirModel() ;
+    private File myFile;
+    private RunDisplayRun RDR = new RunDisplayRun("");
+    private PlaylistModelOfFile playListFile = new PlaylistModelOfFile();
+    private Thread movingNameThread;
+    private String newDirOfFiles="";
+    private MainClass MC = new MainClass();
+    private static int count;
+
+    public static int getCount() {
+        return count;
+    }
+
+    public static void setCount(int count) {
+        MP3PlayerGUI.count = count;
+    }
+    private double lengthOfSongDouble;
+    private int lengthOfSong;
     
-    int xMouse;
-    int yMouse;
+    private int xMouse;
+    private int yMouse;
     
-    int width = (Toolkit.getDefaultToolkit().getScreenSize().width / 2) - 185;
-    int height = Toolkit.getDefaultToolkit().getScreenSize().height - 180;
+    private int width = (Toolkit.getDefaultToolkit().getScreenSize().width / 2) - 185;
+    private int height = Toolkit.getDefaultToolkit().getScreenSize().height - 180;
     
     public MP3PlayerGUI(java.awt.Frame parent, boolean modal) 
     {
@@ -212,45 +220,7 @@ public class MP3PlayerGUI extends javax.swing.JDialog
         
             if(returnVal == JFileChooser.APPROVE_OPTION)
             {   
-               if(RDR.isActive()) 
-               {
-                    RDR.StopMoving(Display);
-                    MC.Stop();
-                    myFile = chooser.getSelectedFile();
-                    String song = myFile + "";
-                    String name = chooser.getSelectedFile().getName();
-                    RDR = new RunDisplayRun(name+"     ");
-                    RDR.Move(Display);
-                    MC.Play(song);
-                    MC.rewind(ReturnSlider, ReturnSlider.getValue());
-                    lengthOfSong=0;
-                    ReturnSlider.setValue(1);
-                    lengthOfSong=(int)MC.songTotalLength;
-                    modelFromList.addData(myFile);
-                    PlayList1.updateUI();
-                    newDirOfFiles=myFile.getAbsolutePath();
-                    myFile=null;
-               }
-               else
-               {
-                    System.out.println(RDR.isActive());
-                    MC.Stop();
-                    myFile = chooser.getSelectedFile();
-                    String song = myFile + "";
-                    String name = chooser.getSelectedFile().getName();
-                    RDR = new RunDisplayRun(name+"     ");
-                    RDR.Move(Display);
-                    MC.Play(song);
-                    MC.rewind(ReturnSlider, ReturnSlider.getValue());
-                    lengthOfSong=0;
-                    ReturnSlider.setValue(1);
-                    lengthOfSong=(int)MC.songTotalLength;
-                    modelFromList.addData(myFile);
-                    PlayList1.updateUI();
-                    newDirOfFiles=myFile.getAbsolutePath();
-                    myFile=null;
-
-               }
+                isRDRActive(chooser);
             }
         }else{
         JFileChooser chooser = new JFileChooser(newDirOfFiles);
@@ -258,47 +228,52 @@ public class MP3PlayerGUI extends javax.swing.JDialog
         
             if(returnVal == JFileChooser.APPROVE_OPTION)
             {   
-               if(RDR.isActive()) 
-               {
-                    RDR.StopMoving(Display);
-                    MC.Stop();
-                    myFile = chooser.getSelectedFile();
-                    String song = myFile + "";
-                    String name = chooser.getSelectedFile().getName();
-                    RDR = new RunDisplayRun(name+"     ");
-                    RDR.Move(Display);
-                    MC.Play(song);
-                    MC.rewind(ReturnSlider, ReturnSlider.getValue());
-                    lengthOfSong=0;
-                    ReturnSlider.setValue(1);
-                    lengthOfSong=(int)MC.songTotalLength;
-                    modelFromList.addData(myFile);
-                    PlayList1.updateUI();
-                    newDirOfFiles=myFile.getAbsolutePath();
-                    myFile=null;
-               }
-               else
-               {
-                    System.out.println(RDR.isActive());
-                    MC.Stop();
-                    myFile = chooser.getSelectedFile();
-                    String song = myFile + "";
-                    String name = chooser.getSelectedFile().getName();
-                    RDR = new RunDisplayRun(name+"     ");
-                    RDR.Move(Display);
-                    MC.Play(song);
-                    MC.rewind(ReturnSlider, ReturnSlider.getValue());
-                    lengthOfSong=0;
-                    ReturnSlider.setValue(1);
-                    lengthOfSong=(int)MC.songTotalLength;
-                    modelFromList.addData(myFile);
-                    PlayList1.updateUI();
-                    newDirOfFiles=myFile.getAbsolutePath();
-                    myFile=null;
-                } 
+                isRDRActive(chooser); 
             }
         }             
     }//GEN-LAST:event_SelectFileMouseReleased
+
+    private void isRDRActive(JFileChooser chooser) {
+        if(RDR.isActive())
+        {
+            RDR.StopMoving(Display);
+            MC.Stop();
+            myFile = chooser.getSelectedFile();
+            String song = myFile + "";
+            String name = chooser.getSelectedFile().getName();
+            RDR = new RunDisplayRun(name+"     ");
+            RDR.Move(Display);
+            MC.Play(song);
+            MC.rewind(ReturnSlider, ReturnSlider.getValue());
+            lengthOfSong=0;
+            ReturnSlider.setValue(1);
+            lengthOfSong=(int)MC.getSongTotalLength();
+            modelFromList.addData(myFile);
+            PlayList1.updateUI();
+            newDirOfFiles=myFile.getAbsolutePath();
+            myFile=null;
+        }
+        else
+        {
+            System.out.println(RDR.isActive());
+            MC.Stop();
+            myFile = chooser.getSelectedFile();
+            String song = myFile + "";
+            String name = chooser.getSelectedFile().getName();
+            RDR = new RunDisplayRun(name+"     ");
+            RDR.Move(Display);
+            MC.Play(song);
+            MC.rewind(ReturnSlider, ReturnSlider.getValue());
+            lengthOfSong=0;
+            ReturnSlider.setValue(1);
+            lengthOfSong=(int)MC.getSongTotalLength();
+            modelFromList.addData(myFile);
+            PlayList1.updateUI();
+            newDirOfFiles=myFile.getAbsolutePath();
+            myFile=null;
+            
+        }
+    }
       
  
         
@@ -324,17 +299,17 @@ public class MP3PlayerGUI extends javax.swing.JDialog
     private void PlayFromMiddleOfFileMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PlayFromMiddleOfFileMouseReleased
         MC.Pause();
         System.out.println(ReturnSlider.getValue());
-        MC.timer.stop();
+        MC.getTimer().stop();
         MC.rewindSong(lengthOfSong/2);
         ReturnSlider.setValue(175);
         MC.rewind(ReturnSlider, ReturnSlider.getValue());
-        MC.timer.start();
+        MC.getTimer().start();
         
     }//GEN-LAST:event_PlayFromMiddleOfFileMouseReleased
 
     private void PlayList1ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_PlayList1ValueChanged
         MC.Pause();
-        MC.timer.stop();
+        MC.getTimer().stop();
         RDR.StopMoving(Display);
         MC.Play(modelFromList.getPath(PlayList1.getSelectedIndex()));
         RDR=new RunDisplayRun((String) modelFromList.getElementAt(PlayList1.getSelectedIndex())+"      ");
@@ -342,18 +317,18 @@ public class MP3PlayerGUI extends javax.swing.JDialog
          MC.rewind(ReturnSlider, ReturnSlider.getValue());
             lengthOfSong=0;
             ReturnSlider.setValue(1);
-            lengthOfSong=(int)MC.songTotalLength;
-            MC.timer.start();
+            lengthOfSong=(int)MC.getSongTotalLength();
+            MC.getTimer().start();
             
     }//GEN-LAST:event_PlayList1ValueChanged
 
     private void ReturnSliderMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ReturnSliderMouseReleased
          MC.Pause();
         System.out.println(ReturnSlider.getValue());
-        MC.timer.stop();
+        MC.getTimer().stop();
         MC.rewindSong((lengthOfSong/350)*(long)ReturnSlider.getValue());
         MC.rewind(ReturnSlider, ReturnSlider.getValue());
-        MC.timer.start();
+        MC.getTimer().start();
     }//GEN-LAST:event_ReturnSliderMouseReleased
 
     private void OpenPlaylistLabelMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OpenPlaylistLabelMouseReleased

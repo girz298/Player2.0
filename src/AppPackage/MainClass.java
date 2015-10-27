@@ -15,15 +15,32 @@ import javazoom.jl.player.Player;
 
 public class MainClass 
 {
-    FileInputStream FIS;
-    BufferedInputStream BIS;
-    public Timer timer;
-    public Player player;
-    public Thread movingLabelOfPositioon;
-    public long pauseLocation;
-    public long songTotalLength;
+    private FileInputStream FIS;
+    private BufferedInputStream BIS;
+    private Timer timer;
+    private boolean counterOfPlayers=true;
+
+    public Timer getTimer() {
+        return timer;
+    }
+
+    public void setTimer(Timer timer) {
+        this.timer = timer;
+    }
+
+    public long getSongTotalLength() {
+        return songTotalLength;
+    }
+
+    public void setSongTotalLength(long songTotalLength) {
+        this.songTotalLength = songTotalLength;
+    }
+    private Player player;
+    private Thread movingLabelOfPositioon;
+    private long pauseLocation;
+    private long songTotalLength;
     
-    public String fileLocation;
+    private String fileLocation;
     
     public void Stop()
     {
@@ -32,7 +49,7 @@ public class MainClass
             System.out.println("Position:"+player.getPosition());
           player.close();
           pauseLocation = 0;
-         /* songTotalLength = 0;*/
+       /*   songTotalLength = 0;*/
           MP3PlayerGUI.Display.setText("");
           timer.stop();
         }   
@@ -44,7 +61,7 @@ public class MainClass
             {
             try {
                 System.out.println(songTotalLength/10000);
-                
+                counterOfPlayers=true;
                 pauseLocation = FIS.available();
                 player.close();
       
@@ -57,7 +74,7 @@ public class MainClass
     
     public void Resume()
     {
-        
+       if(counterOfPlayers){
         try 
         {
             FIS = new FileInputStream(fileLocation);
@@ -81,7 +98,7 @@ public class MainClass
             {
                 try 
                 {
-                    
+                    counterOfPlayers=false;
                     player.play();
                 } 
                 catch (JavaLayerException ex)
@@ -89,7 +106,7 @@ public class MainClass
                     
                 }
             }
-        }.start();
+        }.start();}
     } 
     
     
@@ -182,9 +199,10 @@ public class MainClass
             {
                 try 
                 {
+                    counterOfPlayers=false;
                     player.play();
                     
-                    if(player.isComplete() && MP3PlayerGUI.count==1)
+                    if(player.isComplete() && MP3PlayerGUI.getCount()==1)
                     {
                         Play(fileLocation);
                     }

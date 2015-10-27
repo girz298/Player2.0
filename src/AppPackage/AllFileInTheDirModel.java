@@ -1,30 +1,37 @@
 package AppPackage;
 
 
+import AppPackage.model.ModelOfFile;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.AbstractListModel;
 
 public class AllFileInTheDirModel extends AbstractListModel{
     public AllFileInTheDirModel() {
     }
     
-    ArrayList<String> listOfSongs=new ArrayList<String>();
-    ArrayList<String> listOfPaths=new ArrayList<String>();
-        
+    private ModelOfFile modelOffile;
+    /*private ArrayList<String> listOfSongs=new ArrayList<String>();*/
+    private List<ModelOfFile> listOfPaths=new ArrayList<ModelOfFile>();
+   
     
     public void addData(File myFile) {
-        listOfSongs.add(myFile.getName().replaceFirst(".mp3", ""));
-        listOfPaths.add(myFile.toString());
+        modelOffile = new ModelOfFile();
+        modelOffile.setPath(myFile.toString());
+        modelOffile.setName(myFile.getName().replaceFirst(".mp3", ""));
+        /*listOfSongs.add(myFile.getName().replaceFirst(".mp3", ""));
+        listOfPaths.add(myFile.toString());*/
+        listOfPaths.add(modelOffile);
         
     }
 
     public String getPath(int index)
     {
-    return listOfPaths.get(index);
+    return listOfPaths.get(index).getPath();
     }
     
    
@@ -32,47 +39,50 @@ public class AllFileInTheDirModel extends AbstractListModel{
     public void removeAllData()
     {
         listOfPaths.removeAll(listOfPaths);
-        listOfSongs.removeAll(listOfSongs);
+    /*    listOfSongs.removeAll(listOfSongs);*/
     }
     
     
-    public void addArraydataToPlaylist(ArrayList<File> listOfData)
+  /*  public void addArraydataToPlaylist(ArrayList<File> listOfData)
     {
         for(int i = 0;i<listOfData.size();i++)
         {
+            modelOffile.setPath(listOfData.get(i).toString());
+            modelOffile.setName(listOfData.get(i).getName().replaceFirst(".mp3", ""));
+            listOfPaths.add(modelOffile);
             listOfPaths.add(listOfData.get(i).toString());
             listOfSongs.add(listOfData.get(i).getName().replaceFirst(".mp3", ""));
         
         }
     
-    }
+    }*/
     
     
-    @Override
+   @Override
     public int getSize() {
-        return listOfSongs.size();
+        return listOfPaths.size();
         
     }
 
-    public ArrayList<String> getListOfSongs() {
-        return listOfSongs;
-    }
-
-    public void setListOfSongs(ArrayList<String> listOfSongs) {
-        this.listOfSongs = listOfSongs;
-    }
-
-    public ArrayList<String> getListOfPaths() {
+    public List<ModelOfFile> getListOfSongs() {
         return listOfPaths;
     }
 
-    public void setListOfPaths(ArrayList<String> listOfPaths) {
+    public void setListOfSongs(List<ModelOfFile> listOfSongs) {
+        this.listOfPaths = listOfSongs;
+    }
+
+    public List<ModelOfFile> getListOfPaths() {
+        return listOfPaths;
+    }
+
+    public void setListOfPaths(List<ModelOfFile> listOfPaths) {
         this.listOfPaths = listOfPaths;
     }
 
     @Override
     public Object getElementAt(int index) {
-      return listOfSongs.get(index);
+      return listOfPaths.get(index).getName();
        
     }
     
